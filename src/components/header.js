@@ -11,20 +11,26 @@ const Header = (title, date, temp) => {
   //    <span class="temp">{ temp }</span>
   //  </div>
   //
-    const headerDiv = document.createElement('div');
-    headerDiv.classList.add('header')
-    const headerDate = document.createElement('span');
-    headerDate.classList.add('date');
-    headerDate.textContent = date;
-    const headerTitle = document.createElement('h1');
-    headerTitle.textContent = title;
-    const headerTemp = document.createElement('span');
-    headerTemp.classList.add('temp');
-    headerTemp.textContent = temp;
 
+  // creating elements
+    const headerDiv = document.createElement('div');
+    const headerDate = document.createElement('span');
+    const headerTitle = document.createElement('h1');
+    const headerTemp = document.createElement('span');
+  // adding classes to elements
+    headerDiv.classList.add('header')
+    headerDate.classList.add('date');
+    headerTemp.classList.add('temp');
+  //adding parameter data to elements
+    headerDate.textContent = date;
+    headerTitle.textContent = title;
+    headerTemp.textContent = temp;
+  //organizing correct hierarchy
    headerDiv.appendChild(headerDate);
    headerDiv.appendChild(headerTitle);
    headerDiv.appendChild(headerTemp);
+
+
     return headerDiv;
 }
 
@@ -35,6 +41,7 @@ const headerAppender = (selector) => {
   // It should create a header using the Header component above, passing arguments of your choosing.
   // It should append the header to the element in the DOM that matches the given selector.
   //
+  // calls Header and appends it to where selector points to
   document.querySelector(selector).append(Header('Hello World!', '1/15/21', 'Applied Javascript!'));
 }
 

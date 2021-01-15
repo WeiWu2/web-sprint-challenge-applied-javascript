@@ -13,14 +13,19 @@ const Tabs = (topics) => {
   //   <div class="tab">technology</div>
   // </div>
   //
+
+  // creates div element with topic class
    const tabsTopics = document.createElement('div');
    tabsTopics.classList.add('topics');
+ //loops through topic array and creates a div element with tab class 
+ // and sets the textContent with the strings in topic array
    topics.forEach((topic) => {
     const newTopic = document.createElement('div');
     newTopic.classList.add('tab');
     newTopic.textContent = topic;
     tabsTopics.appendChild(newTopic);
    });
+
    return tabsTopics;
 }
 import axios from 'axios';
@@ -36,6 +41,8 @@ const tabsAppender = (selector) => {
   .get('https://lambda-times-api.herokuapp.com/topics')
   .then(
     (res) => {
+      // calls Tabs function with array taken from the api 
+      // then appends it to where selector points at
     document.querySelector(selector).append(Tabs(res.data.topics));
   }
   )

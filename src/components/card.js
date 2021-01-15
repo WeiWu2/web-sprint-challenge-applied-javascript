@@ -18,7 +18,7 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
-
+  // creating elements
   const cardDiv = document.createElement('div');
   const cardHeadline =  document.createElement('div');
   const cardAuthor =  document.createElement('div');
@@ -26,25 +26,27 @@ const Card = (article) => {
   const cardImg =document.createElement('img');
   const cardAuthorName = document.createElement('span');
 
-
+ // adds corresponding classes to elements
   cardDiv.classList.add('card');
   cardHeadline.classList.add('headline');
   cardAuthor.classList.add('author');
   cardImgContainer.classList.add('img-container');
 
-
+// sets textContent and img src
   cardHeadline.textContent = article.headline;
   cardImg.src = article.authorPhoto;
   cardAuthorName.textContent = article.authorName;
 
+// sets appropriate hierarchy of elements
   cardDiv.appendChild(cardHeadline);
   cardDiv.appendChild(cardAuthor);
   cardAuthor.appendChild(cardImgContainer);
   cardAuthor.appendChild(cardAuthorName);
   cardImgContainer.appendChild(cardImg);
 
-cardDiv.addEventListener('click', (event) => {
-console.log(event);
+// adds EventListener to card that console logs headlines
+cardDiv.addEventListener('click', () => {
+console.log(cardHeadline.textContent);
 });
 
   return cardDiv;
@@ -63,7 +65,16 @@ const cardAppender = (selector) => {
   .get('https://lambda-times-api.herokuapp.com/articles')
   .then(
     (res) => {
-    document.querySelector(selector).append(Card(res.data));
+      // loops through the articles obj 
+    for(let x in res.data.articles)
+    {
+      // loops through each array in the articles obj
+      // calls the Card function on each obj in the arrays and appends them 
+      // to where selector points at
+       res.data.articles[x].forEach((article) => {
+        document.querySelector(selector).append(Card(article));
+       });
+    }
   }
   )
   .catch(
